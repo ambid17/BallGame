@@ -357,6 +357,8 @@ MonoBehaviour:
   spawnLocation: {fileID: 1926468625}
   mainCamera: {fileID: 0}
   marbleInstance: {fileID: 0}
+  moveSpeed: 5
+  sensitivity: 1.5
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

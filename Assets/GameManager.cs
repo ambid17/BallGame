@@ -55,6 +55,11 @@ public class GameManager : MonoBehaviour
         var rotation = new Vector2(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"));
         var targetEuler = mainCamera.transform.rotation.eulerAngles + (Vector3)rotation * sensitivity;
 
+        if (targetEuler.x > 180)
+        {
+            targetEuler.x -= 360;
+        }
+
         targetEuler.x = Mathf.Clamp(targetEuler.x, -90, 90);
         Quaternion newRotation = Quaternion.Euler(targetEuler);
 
