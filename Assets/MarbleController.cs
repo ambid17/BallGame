@@ -8,6 +8,9 @@ public class MarbleController : MonoBehaviour
     private Rigidbody rb;
     public CameraController Camera;
     public GameObject ExplotionPrefab;
+
+    public float jumpPower = 1;
+    public bool canJump = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +37,11 @@ public class MarbleController : MonoBehaviour
         {
             rb.AddForce(new Vector3(1, 0, 0) * moveSpeed, ForceMode.Force);
         }
+        if(canJump && Input.GetKey(KeyCode.Space)) 
+        {
+            canJump = false;
+            rb.AddForce(new Vector3(0, 1, 0) * jumpPower, ForceMode.Impulse);
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -43,6 +51,11 @@ public class MarbleController : MonoBehaviour
             GameObject Explotion = Instantiate(ExplotionPrefab);  
             Explotion.transform.position = collision.gameObject.transform.position;
             Camera.AddOffset();
+        }
+
+        if(collision.gameObject.tag == "Ground")
+        {
+            canJump = true;
         }
         
     }
