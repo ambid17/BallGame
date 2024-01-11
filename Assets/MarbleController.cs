@@ -6,6 +6,8 @@ public class MarbleController : MonoBehaviour
 {
     public float moveSpeed = 1;
     private Rigidbody rb;
+    public CameraController Camera;
+    public GameObject ExplotionPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +15,7 @@ public class MarbleController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //float speedThisframe = moveSpeed * Time.deltaTime;
         if (Input.GetKey(KeyCode.W))
@@ -38,6 +40,9 @@ public class MarbleController : MonoBehaviour
         if (collision.gameObject.tag == "Destuctable") {
             transform.localScale *= 1.1f;
             Destroy(collision.gameObject);
+            GameObject Explotion = Instantiate(ExplotionPrefab);  
+            Explotion.transform.position = collision.gameObject.transform.position;
+            Camera.AddOffset();
         }
         
     }
