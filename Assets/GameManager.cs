@@ -15,10 +15,39 @@ public class GameManager : MonoBehaviour
     {
         marbleInstance = Instantiate(marblePrefab);
         marbleInstance.transform.position = spawnLocation.position;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Confined;
 
         mainCamera = Camera.main.gameObject;
+       // CreateCube(); 
     }
+    private void CreateCube()
+    {
+        GameObject cube = new GameObject();
+        cube.name = "Cubie";
+        MeshFilter filter =cube.AddComponent<MeshFilter>();
+        cube.AddComponent<MeshRenderer>();
+        Mesh myMesh = new Mesh();
+        myMesh.vertices = new Vector3[8];
+        myMesh.vertices[0] = new Vector3(0, 0, 0);
+        myMesh.vertices[1] = new Vector3(0, 1, 0);
+        myMesh.vertices[2] = new Vector3(1, 1, 0);
+        myMesh.vertices[3] = new Vector3(1, 0, 0);
+        myMesh.vertices[4] = new Vector3(0, 0, 1);
+        myMesh.vertices[5] = new Vector3(0, 1, 1);
+        myMesh.vertices[6] = new Vector3(1, 1, 1);
+        myMesh.vertices[7] = new Vector3(1, 0, 1);
+
+        myMesh.triangles= new int[36]; //6sides X 2 Tri per side X 3 Verticies per Triangle
+        myMesh.triangles [0] = 0;
+        myMesh.triangles [1] = 1;
+        myMesh.triangles [2] = 2;
+
+
+        filter.mesh = myMesh;
+    }
+
+
+
 
     void Update()
     {
